@@ -51,7 +51,7 @@ docs/            Logboek, meetresultaten en ontwerpnotities
 - [Later-lijst](docs/later-lijst.md) — bewust buiten scope gehouden ideeën
 - [Metingen object pooling](docs/metingen-pooling.md) — FPS en frametijd, met en zonder pooling
 
-De nagebouwde tutorial uit fase 2 (*Your first 2D game*) staat in een aparte repository: `dodge-the-creeps`.
+De nagebouwde tutorial uit fase 2 (*Your first 2D game*) staat in een aparte repository: [dodge-the-creeps](https://github.com/NielsHoekzema07/dodge-the-creeps).
 
 ## Gebruikte software
 
