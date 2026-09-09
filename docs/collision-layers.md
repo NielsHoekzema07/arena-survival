@@ -23,11 +23,19 @@ Deze namen zijn ingesteld in Project Settings → Layer Names → 2D Physics. Ge
 
 | Object | Layer | Mask (kijkt naar) |
 |---|---|---|
-| Speler | `player` | `enemy`, `pickup`, `world` |
+| Speler (`CharacterBody2D`) | `player` | `world` |
+| Hurtbox van de speler (`Area2D`, fase 5) | `player` | `enemy` |
+| Oppakbereik van de speler (`Area2D`, fase 6) | `player` | `pickup` |
 | Vijand | `enemy` | `player`, `player_bullet`, `world` |
 | Projectiel | `player_bullet` | `enemy`, `world` |
 | Experience-orb | `pickup` | `player` |
 | Muur | `world` | — |
+
+### Waarom de speler zelf alleen naar `world` kijkt
+
+Een `CharacterBody2D` wordt door `move_and_slide()` tegengehouden door alles in zijn mask. Als `enemy` daarin zou zitten, zou de speler tegen vijanden aan botsen en klem komen te zitten zodra er een groep om hem heen staat — precies wat je in dit genre niet wilt: vijanden moeten door je heen kunnen lopen en schade doen door aanraking.
+
+Daarom is het opgesplitst: de body botst alleen tegen muren, en losse `Area2D`-kinderen detecteren aanraking met vijanden en het oppakken van experience. Die twee komen in fase 5 en 6; nu is alleen de body er.
 
 ## Aandachtspunten
 
