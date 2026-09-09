@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cui2paftyaw2o" path="res://scenes/player/player.tscn" id="1_player"]
 [ext_resource type="Script" uid="uid://cj3mvgjluy5lf" path="res://scenes/main/arena_raster.gd" id="2_raster"]
+[ext_resource type="Script" path="res://scenes/enemies/enemy_spawner.gd" id="3_spawner"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="4_enemy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontaal"]
 size = Vector2(2064, 32)
@@ -41,3 +43,7 @@ position = Vector2(1016, 0)
 shape = SubResource("RectangleShape2D_verticaal")
 
 [node name="Player" parent="." unique_id=2005259374 instance=ExtResource("1_player")]
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("3_spawner")
+enemy_scene = ExtResource("4_enemy")

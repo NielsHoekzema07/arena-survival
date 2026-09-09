@@ -26,10 +26,18 @@ Deze namen zijn ingesteld in Project Settings → Layer Names → 2D Physics. Ge
 | Speler (`CharacterBody2D`) | `player` | `world` |
 | Hurtbox van de speler (`Area2D`, fase 5) | `player` | `enemy` |
 | Oppakbereik van de speler (`Area2D`, fase 6) | `player` | `pickup` |
-| Vijand | `enemy` | `player`, `player_bullet`, `world` |
+| Vijand (`CharacterBody2D`) | `enemy` | `world` |
 | Projectiel | `player_bullet` | `enemy`, `world` |
 | Experience-orb | `pickup` | `player` |
 | Muur | `world` | — |
+
+### Detectie is eenrichtingsverkeer
+
+Dit is de regel waar de hele tabel op rust: **maar één van de twee partijen heeft de ander in zijn mask nodig.** Een `Area2D` merkt een lichaam op zodra de layer van dat lichaam in de mask van de Area zit. Andersom hoeft niet.
+
+Daarom staat er bij de vijand alleen `world`. De vijand hoeft niet naar `player_bullet` te kijken om geraakt te kunnen worden: het projectiel is een `Area2D` die naar `enemy` kijkt, en dat is genoeg. Hetzelfde geldt voor de speler raken — dat doet de hurtbox van de speler.
+
+Dubbel instellen is niet fout, maar het kost onnodig werk per frame en het maakt het lastiger te volgen wie nu eigenlijk wat detecteert. Dat scheelt bij 300+ objecten in fase 7 echt iets.
 
 ### Waarom de speler zelf alleen naar `world` kijkt
 
