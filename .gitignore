@@ -1,3 +1,22 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Godot export output
+/build/
+/export/
+
+# Godot .NET / C# build output
+.mono/
+data_*/
+[Bb]in/
+[Oo]bj/
+*.csproj.user
+
+# Bevat lokale paden en eventueel keystore-wachtwoorden
+export_presets.cfg
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
