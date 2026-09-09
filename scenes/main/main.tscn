@@ -1,3 +1,39 @@
-[gd_scene format=3]
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontaal"]
+size = Vector2(2064, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_verticaal"]
+size = Vector2(32, 1200)
 
 [node name="Main" type="Node2D"]
+
+[node name="Arena" type="Node2D" parent="."]
+
+[node name="Vloer" type="Polygon2D" parent="Arena"]
+color = Color(0.145098, 0.156863, 0.188235, 1)
+polygon = PackedVector2Array(-1000, -600, 1000, -600, 1000, 600, -1000, 600)
+
+[node name="Muren" type="StaticBody2D" parent="Arena"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Boven" type="CollisionShape2D" parent="Arena/Muren"]
+position = Vector2(0, -616)
+shape = SubResource("RectangleShape2D_horizontaal")
+
+[node name="Onder" type="CollisionShape2D" parent="Arena/Muren"]
+position = Vector2(0, 616)
+shape = SubResource("RectangleShape2D_horizontaal")
+
+[node name="Links" type="CollisionShape2D" parent="Arena/Muren"]
+position = Vector2(-1016, 0)
+shape = SubResource("RectangleShape2D_verticaal")
+
+[node name="Rechts" type="CollisionShape2D" parent="Arena/Muren"]
+position = Vector2(1016, 0)
+shape = SubResource("RectangleShape2D_verticaal")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
