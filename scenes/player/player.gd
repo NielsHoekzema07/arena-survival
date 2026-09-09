@@ -5,11 +5,23 @@ extends CharacterBody2D
 @export var speed: float = 300.0
 
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var _camera: Camera2D = $Camera2D
 
 
 func _ready() -> void:
-	# Vijanden zoeken de speler straks op via deze groep, niet via een vast pad.
+	# Vijanden zoeken de speler op via deze groep, niet via een vast pad.
 	add_to_group("player")
+	_begrens_camera()
+
+
+## Zorgt dat de camera niet buiten het speelveld kijkt. Staat hier in code en
+## niet in de scene, zodat de arena-afmeting op één plek vastligt.
+func _begrens_camera() -> void:
+	var veld := Speelveld.rect()
+	_camera.limit_left = int(veld.position.x)
+	_camera.limit_top = int(veld.position.y)
+	_camera.limit_right = int(veld.end.x)
+	_camera.limit_bottom = int(veld.end.y)
 
 
 func _physics_process(_delta: float) -> void:

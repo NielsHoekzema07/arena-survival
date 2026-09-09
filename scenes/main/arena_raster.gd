@@ -8,8 +8,8 @@ extends Node2D
 ## @tool zorgt dat het raster ook in de editor getekend wordt, niet alleen
 ## tijdens het spelen.
 
-## Afmeting van de arena. Moet overeenkomen met de muren in main.tscn.
-@export var arena_grootte: Vector2 = Vector2(2000, 1200):
+## Afmeting van de arena, standaard die van Speelveld.
+@export var arena_grootte: Vector2 = Speelveld.GROOTTE:
 	set(waarde):
 		arena_grootte = waarde
 		queue_redraw()
