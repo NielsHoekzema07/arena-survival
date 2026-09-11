@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://c0tagmure3gw7"]
 
+[ext_resource type="Script" uid="uid://cwiuyu58k43sb" path="res://scenes/main/arena.gd" id="1_6q06x"]
 [ext_resource type="PackedScene" uid="uid://cui2paftyaw2o" path="res://scenes/player/player.tscn" id="1_player"]
 [ext_resource type="Script" uid="uid://cj3mvgjluy5lf" path="res://scenes/main/arena_raster.gd" id="2_raster"]
-[ext_resource type="Script" path="res://scenes/enemies/enemy_spawner.gd" id="3_spawner"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="4_enemy"]
+[ext_resource type="Script" uid="uid://0hu11e2jdoxr" path="res://scenes/enemies/enemy_spawner.gd" id="3_spawner"]
+[ext_resource type="PackedScene" uid="uid://cul8bd30mr63d" path="res://scenes/enemies/enemy.tscn" id="4_enemy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontaal"]
 size = Vector2(2064, 32)
@@ -12,8 +13,10 @@ size = Vector2(2064, 32)
 size = Vector2(32, 1200)
 
 [node name="Main" type="Node2D" unique_id=1404154589]
+metadata/_edit_group_ = true
 
 [node name="Arena" type="Node2D" parent="." unique_id=1311022499]
+script = ExtResource("1_6q06x")
 
 [node name="Vloer" type="Polygon2D" parent="Arena" unique_id=1143302583]
 color = Color(0.145098, 0.156863, 0.188235, 1)
@@ -44,6 +47,6 @@ shape = SubResource("RectangleShape2D_verticaal")
 
 [node name="Player" parent="." unique_id=2005259374 instance=ExtResource("1_player")]
 
-[node name="EnemySpawner" type="Node2D" parent="."]
+[node name="EnemySpawner" type="Node2D" parent="." unique_id=2063556495]
 script = ExtResource("3_spawner")
 enemy_scene = ExtResource("4_enemy")
