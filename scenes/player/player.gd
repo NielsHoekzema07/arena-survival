@@ -1,8 +1,25 @@
 class_name Player
 extends CharacterBody2D
 
+## Wordt uitgezonden zodra de levenspunten veranderen. De HUD luistert hiernaar.
+signal health_changed(huidig: int, maximum: int)
+
 ## Loopsnelheid in pixels per seconde.
 @export var speed: float = 300.0
+
+## Aantal levenspunten waarmee een run begint.
+@export var max_health: int = 5
+
+## Huidige levenspunten. Via de setter wordt de waarde begrensd en wordt het
+## signaal uitgezonden, zodat elke plek die dit aanpast automatisch de HUD
+## bijwerkt. In fase 5 doet neem_schade() hier simpelweg `health -= schade`.
+var health: int:
+	set(waarde):
+		var nieuw := clampi(waarde, 0, max_health)
+		if nieuw == health:
+			return
+		health = nieuw
+		health_changed.emit(health, max_health)
 
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _camera: Camera2D = $Camera2D
@@ -11,6 +28,7 @@ extends CharacterBody2D
 func _ready() -> void:
 	# Vijanden zoeken de speler op via deze groep, niet via een vast pad.
 	add_to_group("player")
+	health = max_health
 	_begrens_camera()
 
 

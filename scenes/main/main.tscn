@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cj3mvgjluy5lf" path="res://scenes/main/arena_raster.gd" id="2_raster"]
 [ext_resource type="Script" uid="uid://0hu11e2jdoxr" path="res://scenes/enemies/enemy_spawner.gd" id="3_spawner"]
 [ext_resource type="PackedScene" uid="uid://cul8bd30mr63d" path="res://scenes/enemies/enemy.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" uid="uid://ct0f7ppoodb07" path="res://scenes/ui/hud.tscn" id="5_hud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6q06x"]
 size = Vector2(5064, 32)
@@ -58,3 +59,5 @@ shape = SubResource("RectangleShape2D_yyfjg")
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2063556495]
 script = ExtResource("3_spawner")
 enemy_scene = ExtResource("4_enemy")
+
+[node name="Hud" parent="." instance=ExtResource("5_hud")]

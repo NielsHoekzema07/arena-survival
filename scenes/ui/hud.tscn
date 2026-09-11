@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct0f7ppoodb07"]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_hud"]
+
+[node name="Hud" type="CanvasLayer" unique_id=971975134]
+script = ExtResource("1_hud")
+
+[node name="RechtsOnder" type="VBoxContainer" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -48.0
+offset_right = -20.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HealthBar" type="ProgressBar" parent="RechtsOnder"]
+custom_minimum_size = Vector2(200, 24)
+layout_mode = 2
+max_value = 5.0
+value = 5.0
+show_percentage = false
