@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cb7x3nbff4ce" path="res://assets/art/playerGrey_up2.png" id="3_up2"]
 [ext_resource type="Texture2D" uid="uid://bxh73ema3ujhc" path="res://assets/art/playerGrey_walk1.png" id="4_walk1"]
 [ext_resource type="Texture2D" uid="uid://bbkanf3slb7gy" path="res://assets/art/playerGrey_walk2.png" id="5_walk2"]
+[ext_resource type="Script" path="res://scenes/player/weapon.gd" id="6_weapon"]
+[ext_resource type="PackedScene" uid="uid://bybkpo3fep85n" path="res://scenes/projectiles/Bullet.tscn" id="7_bullet"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
 animations = [{
@@ -47,6 +49,10 @@ animation = &"up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=477987499]
 shape = SubResource("CircleShape2D_player")
+
+[node name="Weapon" type="Node2D" parent="."]
+script = ExtResource("6_weapon")
+bullet_scene = ExtResource("7_bullet")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=614535787]
 position_smoothing_enabled = true

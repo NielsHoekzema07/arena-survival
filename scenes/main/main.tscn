@@ -6,11 +6,17 @@
 [ext_resource type="Script" uid="uid://0hu11e2jdoxr" path="res://scenes/enemies/enemy_spawner.gd" id="3_spawner"]
 [ext_resource type="PackedScene" uid="uid://cul8bd30mr63d" path="res://scenes/enemies/enemy.tscn" id="4_enemy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontaal"]
-size = Vector2(2064, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6q06x"]
+size = Vector2(5064, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_verticaal"]
-size = Vector2(32, 1200)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5a4"]
+size = Vector2(5064, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hujxm"]
+size = Vector2(32, 3000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyfjg"]
+size = Vector2(32, 3000)
 
 [node name="Main" type="Node2D" unique_id=1404154589]
 metadata/_edit_group_ = true
@@ -20,7 +26,7 @@ script = ExtResource("1_6q06x")
 
 [node name="Vloer" type="Polygon2D" parent="Arena" unique_id=1143302583]
 color = Color(0.145098, 0.156863, 0.188235, 1)
-polygon = PackedVector2Array(-1000, -600, 1000, -600, 1000, 600, -1000, 600)
+polygon = PackedVector2Array(-2500, -1500, 2500, -1500, 2500, 1500, -2500, 1500)
 
 [node name="Raster" type="Node2D" parent="Arena" unique_id=1715483349]
 script = ExtResource("2_raster")
@@ -30,22 +36,24 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="Boven" type="CollisionShape2D" parent="Arena/Muren" unique_id=1345315670]
-position = Vector2(0, -616)
-shape = SubResource("RectangleShape2D_horizontaal")
+position = Vector2(0, -1516)
+shape = SubResource("RectangleShape2D_6q06x")
 
 [node name="Onder" type="CollisionShape2D" parent="Arena/Muren" unique_id=267633510]
-position = Vector2(0, 616)
-shape = SubResource("RectangleShape2D_horizontaal")
+position = Vector2(0, 1516)
+shape = SubResource("RectangleShape2D_ow5a4")
 
 [node name="Links" type="CollisionShape2D" parent="Arena/Muren" unique_id=569649541]
-position = Vector2(-1016, 0)
-shape = SubResource("RectangleShape2D_verticaal")
+position = Vector2(-2516, 0)
+shape = SubResource("RectangleShape2D_hujxm")
 
 [node name="Rechts" type="CollisionShape2D" parent="Arena/Muren" unique_id=1800251253]
-position = Vector2(1016, 0)
-shape = SubResource("RectangleShape2D_verticaal")
+position = Vector2(2516, 0)
+shape = SubResource("RectangleShape2D_yyfjg")
 
 [node name="Player" parent="." unique_id=2005259374 instance=ExtResource("1_player")]
+
+[node name="Projectielen" type="Node2D" parent="." unique_id=1598638241 groups=["projectielen"]]
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2063556495]
 script = ExtResource("3_spawner")
