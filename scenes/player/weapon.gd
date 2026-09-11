@@ -11,7 +11,7 @@ extends Node2D
 @export var bullet_scene: PackedScene
 
 ## Seconden tussen twee schoten.
-@export var vuur_interval: float = 1:
+@export var vuur_interval: float = 0.5:
 	set(waarde):
 		vuur_interval = maxf(waarde, 0.05)
 		if is_instance_valid(_timer):
@@ -19,7 +19,7 @@ extends Node2D
 
 ## Maximale afstand waarop nog geschoten wordt. Vijanden verder weg worden
 ## genegeerd, zodat je niet op iets buiten beeld staat te vuren.
-@export var bereik: float = 400.0
+@export var bereik: float = 700.0
 
 var _timer: Timer
 
