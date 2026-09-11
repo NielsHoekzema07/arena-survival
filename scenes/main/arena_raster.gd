@@ -8,12 +8,6 @@ extends Node2D
 ## @tool zorgt dat het raster ook in de editor getekend wordt, niet alleen
 ## tijdens het spelen.
 
-## Afmeting van de arena, standaard die van Speelveld.
-@export var arena_grootte: Vector2 = Speelveld.GROOTTE:
-	set(waarde):
-		arena_grootte = waarde
-		queue_redraw()
-
 ## Afstand tussen twee rasterlijnen in pixels.
 @export var celgrootte: float = 64.0:
 	set(waarde):
@@ -43,7 +37,7 @@ extends Node2D
 
 
 func _draw() -> void:
-	var half := arena_grootte * 0.5
+	var half := Speelveld.GROOTTE * 0.5
 
 	# Verticale lijnen, van het midden naar buiten zodat de zware lijnen
 	# symmetrisch liggen.
@@ -61,4 +55,4 @@ func _draw() -> void:
 		draw_line(Vector2(-half.x, y), Vector2(half.x, y), kleur, 1.0)
 
 	# Duidelijke rand, zodat je ziet waar de muren staan.
-	draw_rect(Rect2(-half, arena_grootte), randkleur, false, 3.0)
+	draw_rect(Rect2(-half, Speelveld.GROOTTE), randkleur, false, 3.0)

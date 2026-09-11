@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://ct0f7ppoodb07"]
+[gd_scene format=3 uid="uid://ct0f7ppoodb07"]
 
-[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://bvym42rfvqjny" path="res://scenes/ui/hud.gd" id="1_hud"]
 
 [node name="Hud" type="CanvasLayer" unique_id=971975134]
+process_mode = 3
 script = ExtResource("1_hud")
 
-[node name="RechtsOnder" type="VBoxContainer" parent="."]
-layout_mode = 3
+[node name="RechtsOnder" type="VBoxContainer" parent="." unique_id=1088661321]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -19,9 +19,51 @@ offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="HealthBar" type="ProgressBar" parent="RechtsOnder"]
+[node name="HealthBar" type="ProgressBar" parent="RechtsOnder" unique_id=227485846]
 custom_minimum_size = Vector2(200, 24)
 layout_mode = 2
 max_value = 1000.0
 value = 1000.0
 show_percentage = false
+
+[node name="GameOver" type="Control" parent="." unique_id=1893752191]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Verduistering" type="ColorRect" parent="GameOver" unique_id=2105413033]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Midden" type="CenterContainer" parent="GameOver" unique_id=139585514]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tekst" type="VBoxContainer" parent="GameOver/Midden" unique_id=1395286008]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Titel" type="Label" parent="GameOver/Midden/Tekst" unique_id=2086316320]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Game over"
+horizontal_alignment = 1
+
+[node name="Uitleg" type="Label" parent="GameOver/Midden/Tekst" unique_id=376544340]
+layout_mode = 2
+text = "Druk op Enter of spatie voor een nieuwe run"
+horizontal_alignment = 1

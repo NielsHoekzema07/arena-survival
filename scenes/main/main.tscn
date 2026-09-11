@@ -7,16 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://cul8bd30mr63d" path="res://scenes/enemies/enemy.tscn" id="4_enemy"]
 [ext_resource type="PackedScene" uid="uid://ct0f7ppoodb07" path="res://scenes/ui/hud.tscn" id="5_hud"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6q06x"]
-size = Vector2(5064, 32)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5a4"]
 size = Vector2(5064, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hujxm"]
-size = Vector2(32, 3000)
+size = Vector2(5064, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyfjg"]
+size = Vector2(32, 3000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1x3f"]
 size = Vector2(32, 3000)
 
 [node name="Main" type="Node2D" unique_id=1404154589]
@@ -38,19 +38,19 @@ collision_mask = 0
 
 [node name="Boven" type="CollisionShape2D" parent="Arena/Muren" unique_id=1345315670]
 position = Vector2(0, -1516)
-shape = SubResource("RectangleShape2D_6q06x")
+shape = SubResource("RectangleShape2D_ow5a4")
 
 [node name="Onder" type="CollisionShape2D" parent="Arena/Muren" unique_id=267633510]
 position = Vector2(0, 1516)
-shape = SubResource("RectangleShape2D_ow5a4")
+shape = SubResource("RectangleShape2D_hujxm")
 
 [node name="Links" type="CollisionShape2D" parent="Arena/Muren" unique_id=569649541]
 position = Vector2(-2516, 0)
-shape = SubResource("RectangleShape2D_hujxm")
+shape = SubResource("RectangleShape2D_yyfjg")
 
 [node name="Rechts" type="CollisionShape2D" parent="Arena/Muren" unique_id=1800251253]
 position = Vector2(2516, 0)
-shape = SubResource("RectangleShape2D_yyfjg")
+shape = SubResource("RectangleShape2D_b1x3f")
 
 [node name="Player" parent="." unique_id=2005259374 instance=ExtResource("1_player")]
 
@@ -60,4 +60,5 @@ shape = SubResource("RectangleShape2D_yyfjg")
 script = ExtResource("3_spawner")
 enemy_scene = ExtResource("4_enemy")
 
-[node name="Hud" parent="." instance=ExtResource("5_hud")]
+[node name="Hud" parent="." unique_id=1243341960 instance=ExtResource("5_hud")]
+process_mode = 3

@@ -10,6 +10,15 @@ extends CharacterBody2D
 ## Loopsnelheid in pixels per seconde.
 @export var speed: float = 120.0
 
+## Schade per treffer.
+##
+## Het aantal treffers dat de speler overleeft is max_health gedeeld door deze
+## waarde; met 1000 levenspunten en 100 schade zijn dat er tien. Hoe snel die
+## treffers binnenkomen hangt af van onkwetsbaar_tijd op de speler, niet van hoe
+## veel vijanden er tegen je aan staan. In fase 6 gaat deze waarde omhoog
+## naarmate een run langer duurt.
+@export var damage: int = 100
+
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var _doel: Node2D
