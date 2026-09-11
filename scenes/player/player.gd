@@ -8,7 +8,12 @@ signal health_changed(huidig: int, maximum: int)
 @export var speed: float = 300.0
 
 ## Aantal levenspunten waarmee een run begint.
-@export var max_health: int = 5
+##
+## Bewust 1000 en niet 100: schade wordt later vermenigvuldigd (vijanden die
+## opschalen, upgrades in procenten) en health is een int. Bij kleine getallen
+## rondt zo'n vermenigvuldiging weg - 3 schade keer 0.9 is weer 3 - waardoor een
+## upgrade niets lijkt te doen. Met 1000 als basis blijft elke stap zichtbaar.
+@export var max_health: int = 1000
 
 ## Huidige levenspunten. Via de setter wordt de waarde begrensd en wordt het
 ## signaal uitgezonden, zodat elke plek die dit aanpast automatisch de HUD
