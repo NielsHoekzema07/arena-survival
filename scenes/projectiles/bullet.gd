@@ -4,12 +4,11 @@ extends Area2D
 ## Projectiel dat in een rechte lijn vliegt en de eerste vijand uitschakelt die
 ## het raakt.
 ##
-## De kogel vliegt langs zijn eigen +X-as (`transform.x`). De sprite en de
-## collision shape zijn daarom 90 graden gedraaid in Bullet.tscn, want het
-## plaatje wijst van zichzelf omhoog.
+## De kogel vliegt langs zijn eigen +X-as (`transform.x`). De pijl-sprites
+## wijzen van zichzelf al naar rechts, dus er hoeft niets gedraaid te worden.
 
 ## Snelheid in pixels per seconde.
-@export var speed: float = 750.0
+@export var speed: float = 100.0
 
 
 func _ready() -> void:
