@@ -119,7 +119,7 @@ func _controleer_aanraking() -> void:
 
 	for lichaam in _hurtbox.get_overlapping_bodies():
 		if lichaam is Enemy:
-			neem_schade((lichaam as Enemy).damage)
+			neem_schade((lichaam as Enemy).contactschade)
 			return
 
 

@@ -8,7 +8,16 @@ extends Area2D
 ## wijzen van zichzelf al naar rechts, dus er hoeft niets gedraaid te worden.
 
 ## Snelheid in pixels per seconde.
-@export var speed: float = 100.0
+@export var speed: float = 300.0
+
+## Schade per treffer.
+##
+## Het wapen overschrijft dit bij het afvuren; de waarde hier is alleen een
+## zinnige default zodat de scene ook los te testen is. De kogel krijgt een
+## eigen kopie in plaats van de schade bij het wapen op te halen als hij raakt:
+## de kogel kan zijn wapen overleven als de speler doodgaat, en een gepoold
+## object moet in fase 7 op zichzelf kunnen staan.
+@export var damage: int = 35
 
 
 func _ready() -> void:
@@ -20,12 +29,13 @@ func _ready() -> void:
 
 ## Zet de kogel klaar op een positie en laat hem een kant op wijzen.
 ## `richting` moet genormaliseerd zijn.
-func spawn_op(positie: Vector2, richting: Vector2) -> void:
+func spawn_op(positie: Vector2, richting: Vector2, schade: int) -> void:
 	# `position` en niet `global_position`: dit gebeurt voordat de kogel in de
 	# scene-boom hangt. Het wapen geeft daarom een positie door in het stelsel
 	# van de container waar de kogel onder komt te hangen.
 	position = positie
 	rotation = richting.angle()
+	damage = schade
 
 
 func _physics_process(delta: float) -> void:
@@ -38,8 +48,12 @@ func _physics_process(delta: float) -> void:
 
 
 func _op_body_geraakt(body: Node2D) -> void:
-	if body.is_in_group("enemies"):
-		body.queue_free()
+	# De kogel bepaalt alleen hoeveel schade hij doet. Of de vijand daarvan
+	# doodgaat, beslist de vijand zelf - zo staat "hoe gaat een vijand dood" op
+	# een plek, ook als daar straks een experience-drop en een object pool bij
+	# komen.
+	if body is Enemy:
+		(body as Enemy).neem_schade(damage)
 		_ruim_op()
 
 

@@ -10,8 +10,17 @@ extends Node2D
 ## Welke kogelscene er geschoten wordt.
 @export var bullet_scene: PackedScene
 
+## Schade per kogel. Dit is de waarde die een upgrade in fase 6 verhoogt.
+@export var schade: int = 35
+
 ## Seconden tussen twee schoten.
-@export var vuur_interval: float = 1:
+##
+## Hangt samen met hoe snel er gespawnd wordt. Om bij te blijven geldt:
+## schoten per seconde >= treffers per kill x spawns per seconde.
+## Met 100 levenspunten en 35 schade zijn dat drie treffers, en bij een spawn per
+## seconde heb je dus minstens drie schoten per seconde nodig. 0,25 geeft er vier
+## en dus wat marge.
+@export var vuur_interval: float = 0.25:
 	set(waarde):
 		vuur_interval = maxf(waarde, 0.05)
 		if is_instance_valid(_timer):
@@ -132,6 +141,7 @@ func _vuur_op(doel: Node2D) -> void:
 	# vijandspawner.
 	kogel.spawn_op(
 		global_position - container.global_position,
-		global_position.direction_to(doel.global_position)
+		global_position.direction_to(doel.global_position),
+		schade
 	)
 	container.add_child(kogel)
