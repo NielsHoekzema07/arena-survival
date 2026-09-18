@@ -48,10 +48,17 @@ func _op_timer() -> void:
 		return
 
 	var vijand := enemy_scene.instantiate() as Enemy
-	# Eerst in de boom hangen, dan pas positioneren: _ready moet gedraaid
-	# hebben voordat spawn_op de speler opzoekt.
+
+	# Eerst positioneren, dan pas in de boom hangen. Andersom wordt de vijand bij
+	# de physics-server aangemeld op de positie van de spawner - het midden van
+	# de arena - en ziet de hurtbox van de speler hem daar als treffer, ook al
+	# staat hij een regel later 700 pixels verderop. Dat kostte de speler elke
+	# spawn een treffer uit het niets.
+	#
+	# spawn_op zet een positie in het stelsel van de spawner, vandaar dat de
+	# eigen global_position eraf gaat.
+	vijand.spawn_op(_kies_spawnpositie() - global_position)
 	add_child(vijand)
-	vijand.spawn_op(_kies_spawnpositie())
 
 
 ## Kiest een willekeurige hoek op een cirkel rond de speler. Ligt dat punt

@@ -11,7 +11,7 @@ extends Node2D
 @export var bullet_scene: PackedScene
 
 ## Seconden tussen twee schoten.
-@export var vuur_interval: float = 1:
+@export var vuur_interval: float = 10000000:
 	set(waarde):
 		vuur_interval = maxf(waarde, 0.05)
 		if is_instance_valid(_timer):
@@ -63,11 +63,19 @@ func _vuur_op(doel: Node2D) -> void:
 		push_warning("Weapon heeft geen bullet_scene ingesteld.")
 		return
 
-	var container := get_tree().get_first_node_in_group("projectielen")
+	var container := get_tree().get_first_node_in_group("projectielen") as Node2D
 	if container == null:
 		push_warning("Geen node in de groep 'projectielen' gevonden.")
 		return
 
 	var kogel := bullet_scene.instantiate() as Bullet
+
+	# Eerst positioneren, dan pas in de boom hangen. Andersom bestaat de kogel
+	# een frame lang op de positie van de container en kan hij daar al een
+	# vijand raken die hij nooit is tegengekomen. Zelfde valkuil als bij de
+	# vijandspawner.
+	kogel.spawn_op(
+		global_position - container.global_position,
+		global_position.direction_to(doel.global_position)
+	)
 	container.add_child(kogel)
-	kogel.spawn_op(global_position, global_position.direction_to(doel.global_position))

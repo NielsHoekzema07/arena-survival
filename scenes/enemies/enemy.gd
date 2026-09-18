@@ -34,9 +34,16 @@ func _ready() -> void:
 ## hergebruiken van een vijand, zodat er dan niets aan deze scene hoeft te
 ## veranderen.
 func spawn_op(positie: Vector2) -> void:
-	global_position = positie
+	# `position` en niet `global_position`: deze functie wordt aangeroepen
+	# voordat de vijand in de scene-boom hangt, en global_position heeft dan geen
+	# betekenis. De spawner geeft daarom een positie in zijn eigen stelsel door.
+	position = positie
 	velocity = Vector2.ZERO
-	_zoek_doel()
+
+	# Bij een verse vijand doet _ready dit straks zelf; bij een vijand uit de
+	# object pool in fase 7 hangt hij al in de boom en is dit wel nodig.
+	if is_inside_tree():
+		_zoek_doel()
 
 
 func _physics_process(_delta: float) -> void:

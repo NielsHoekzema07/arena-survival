@@ -22,7 +22,10 @@ func _ready() -> void:
 ## Zet de kogel klaar op een positie en laat hem een kant op wijzen.
 ## `richting` moet genormaliseerd zijn.
 func spawn_op(positie: Vector2, richting: Vector2) -> void:
-	global_position = positie
+	# `position` en niet `global_position`: dit gebeurt voordat de kogel in de
+	# scene-boom hangt. Het wapen geeft daarom een positie door in het stelsel
+	# van de container waar de kogel onder komt te hangen.
+	position = positie
 	rotation = richting.angle()
 
 
