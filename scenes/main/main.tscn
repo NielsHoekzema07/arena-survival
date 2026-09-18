@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://0hu11e2jdoxr" path="res://scenes/enemies/enemy_spawner.gd" id="3_spawner"]
 [ext_resource type="PackedScene" uid="uid://cul8bd30mr63d" path="res://scenes/enemies/enemy.tscn" id="4_enemy"]
 [ext_resource type="PackedScene" uid="uid://ct0f7ppoodb07" path="res://scenes/ui/hud.tscn" id="5_hud"]
+[ext_resource type="Resource" path="res://scenes/enemies/types/clawed_abomination.tres" id="6_type"]
+[ext_resource type="Resource" path="res://scenes/enemies/types/depraved_blackguard.tres" id="7_type"]
+[ext_resource type="Resource" path="res://scenes/enemies/types/crimson_imp.tres" id="8_type"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5a4"]
 size = Vector2(5064, 32)
@@ -59,6 +62,7 @@ shape = SubResource("RectangleShape2D_b1x3f")
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2063556495]
 script = ExtResource("3_spawner")
 enemy_scene = ExtResource("4_enemy")
+vijand_types = Array[Resource]([ExtResource("6_type"), ExtResource("7_type"), ExtResource("8_type")])
 
 [node name="Hud" parent="." unique_id=1243341960 instance=ExtResource("5_hud")]
 process_mode = 3

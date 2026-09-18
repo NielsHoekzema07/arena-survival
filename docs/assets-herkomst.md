@@ -10,6 +10,20 @@ Per bestand vastleggen waar het vandaan komt en onder welke licentie. Nodig voor
 | `assets/audio/gameover.wav` | Godot-tutorial | CC0 |
 | `assets/fonts/Xolonium-Regular.ttf` | Severin Meyer | SIL Open Font License (zie `LICENSE.txt`) |
 | `assets/art/bullet/arrow_00..29.png` | Pack "MagickArrow", variant 1 van 3 | **NOG INVULLEN** |
+| `assets/art/enemies/clawed_abomination.png` | Pack "basic asset pack", Basic Demon Animations | **NOG INVULLEN** |
+| `assets/art/enemies/depraved_blackguard.png` | idem | **NOG INVULLEN** |
+| `assets/art/enemies/crimson_imp.png` | idem | **NOG INVULLEN** |
+
+De vijandsprites zijn spritesheets van 64×16 met vier loopframes van 16×16. Ze
+worden niet opgeknipt tot losse bestanden: de `.tres` van elk vijandtype wijst
+met `AtlasTexture`-uitsnedes naar het vel. Dat scheelt twaalf bestanden.
+
+De overige twaalf demonen uit dat pack zijn niet opgenomen. Ze zijn bruikbaar
+als je later meer vijandtypes wilt — dat is dan alleen een PNG kopiëren en een
+`.tres` aanmaken.
+
+De eerder aangeleverde packs "Tiny RPG Character Asset Pack 01 en 02" zijn niet
+gebruikt.
 
 > Voor de MagickArrow-sprites moet je zelf nog vastleggen waar ze vandaan komen
 > en onder welke licentie ze vallen. Je Plan van Aanpak belooft uitsluitend

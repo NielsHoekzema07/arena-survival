@@ -7,31 +7,28 @@ extends CharacterBody2D
 ## speler geraakt wordt en dat projectielen de vijand raken, wordt straks
 ## afgehandeld door Area2D's aan de andere kant — zie docs/collision-layers.md.
 
-## Loopsnelheid in pixels per seconde.
-@export var speed: float = 120.0
-
-## Schade die deze vijand aan de SPELER doet bij aanraking.
-##
-## Heet bewust niet `damage`: dat verwart met de levenspunten van de vijand zelf,
-## die hieronder staan. Het aantal treffers dat de speler overleeft is diens
-## max_health gedeeld door deze waarde; met 1000 levenspunten en 100 schade zijn
-## dat er tien. Hoe snel die treffers binnenkomen hangt af van onkwetsbaar_tijd
-## op de speler, niet van hoe veel vijanden er tegen je aan staan. In fase 6 gaat
-## deze waarde omhoog naarmate een run langer duurt.
-@export var contactschade: int = 100
-
-## Levenspunten van de vijand zelf.
-##
-## Anders dan bij de speler is 100 hier ruim genoeg. Bij de speler telt elk
-## schadepunt op, dus daar maakt afronding verschil. Hier telt alleen of je onder
-## een drempel komt: het aantal benodigde treffers is een heel getal, en dat
-## wordt niet fijner van grotere getallen.
-@export var max_health: int = 100
+## Welk type deze vijand is als de spawner niets meegeeft. Handig om de scene
+## los te kunnen openen en testen.
+@export var standaard_type: VijandType
 
 ## Hoe lang de vijand wit oplicht na een treffer, in seconden.
 @export var flits_tijd: float = 0.08
 
+## Waarden die uit het type komen. Staan als gewone variabelen en niet als
+## @export, want het type bepaalt ze; player.gd leest contactschade hiervandaan.
+var speed: float = 120.0
+var contactschade: int = 100
+var max_health: int = 100
+
 var health: int
+
+var _type: VijandType
+
+## De botsingsvorm zit in de scene en wordt dus door alle vijanden gedeeld. Om
+## de straal per type te kunnen zetten krijgt elke vijand eenmalig een eigen
+## kopie. Eenmalig en niet per spawn, zodat een gepoolde vijand in fase 7 geen
+## nieuwe resource nodig heeft.
+var _heeft_eigen_vorm: bool = false
 
 ## Resterende flitstijd. Bewust een simpele float die afgeteld wordt in plaats
 ## van een Tween per treffer: een Tween is een object dat je bij elke treffer
@@ -46,8 +43,37 @@ var _doel: Node2D
 
 func _ready() -> void:
 	add_to_group("enemies")
-	health = max_health
+	if _type == null:
+		pas_type_toe(standaard_type)
 	_zoek_doel()
+
+
+## Zet alle eigenschappen die bij een vijandtype horen.
+##
+## Gebruikt $-lookups en geen @onready: deze functie draait al voordat de vijand
+## in de scene-boom hangt, en @onready-variabelen zijn dan nog leeg. get_node
+## werkt wel, want de kinderen bestaan zodra de scene geinstantieerd is.
+func pas_type_toe(nieuw_type: VijandType) -> void:
+	if nieuw_type == null:
+		return
+
+	_type = nieuw_type
+	speed = _type.speed
+	max_health = _type.max_health
+	contactschade = _type.contactschade
+	health = max_health
+
+	var sprite: AnimatedSprite2D = $AnimatedSprite2D
+	sprite.sprite_frames = _type.sprite_frames
+	sprite.scale = Vector2.ONE * _type.sprite_schaal
+	sprite.modulate = Color.WHITE
+	sprite.play(&"default")
+
+	var vorm_node: CollisionShape2D = $CollisionShape2D
+	if not _heeft_eigen_vorm:
+		vorm_node.shape = CircleShape2D.new()
+		_heeft_eigen_vorm = true
+	(vorm_node.shape as CircleShape2D).radius = _type.straal
 
 
 ## Brengt schade toe. De vijand beslist zelf wanneer hij doodgaat; de kogel
@@ -78,7 +104,9 @@ func _ga_dood() -> void:
 ## aanmaken. In fase 7 roept de object pool dezelfde functie aan bij het
 ## hergebruiken van een vijand, zodat er dan niets aan deze scene hoeft te
 ## veranderen.
-func spawn_op(positie: Vector2) -> void:
+func spawn_op(positie: Vector2, nieuw_type: VijandType = null) -> void:
+	pas_type_toe(nieuw_type)
+
 	# `position` en niet `global_position`: deze functie wordt aangeroepen
 	# voordat de vijand in de scene-boom hangt, en global_position heeft dan geen
 	# betekenis. De spawner geeft daarom een positie in zijn eigen stelsel door.

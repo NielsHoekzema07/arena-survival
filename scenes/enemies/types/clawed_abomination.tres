@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="VijandType" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/vijand_type.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/clawed_abomination.png" id="2_sheet"]
+
+[sub_resource type="AtlasTexture" id="Atlas_0"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="Atlas_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="Atlas_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="Atlas_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="Frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[resource]
+script = ExtResource("1_script")
+naam = "Clawed Abomination"
+sprite_frames = SubResource("Frames")
+sprite_schaal = 4.2
+straal = 28.0
+speed = 70.0
+max_health = 175
+contactschade = 60
+spawngewicht = 30.0

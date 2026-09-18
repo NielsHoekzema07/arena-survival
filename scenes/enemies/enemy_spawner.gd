@@ -6,8 +6,13 @@ extends Node2D
 ## duurt; in fase 7 komen de vijanden uit een object pool in plaats van uit
 ## Instantiate().
 
-## Welke vijandscene er gespawnd wordt.
+## Welke vijandscene er gespawnd wordt. Er is er maar één; het type bepaalt hoe
+## hij eruitziet en hoe sterk hij is.
 @export var enemy_scene: PackedScene
+
+## De types die gespawnd kunnen worden, met hun relatieve gewicht. Staan alle
+## drie op gewicht 30, dus elk type komt een derde van de tijd voorbij.
+@export var vijand_types: Array[VijandType] = []
 
 ## Seconden tussen twee spawns.
 @export var spawn_interval: float = 1.0:
@@ -57,8 +62,37 @@ func _op_timer() -> void:
 	#
 	# spawn_op zet een positie in het stelsel van de spawner, vandaar dat de
 	# eigen global_position eraf gaat.
-	vijand.spawn_op(_kies_spawnpositie() - global_position)
+	vijand.spawn_op(_kies_spawnpositie() - global_position, _kies_type())
 	add_child(vijand)
+
+
+## Trekt een type op basis van de gewichten.
+##
+## Werkt met gewichten en niet met vaste percentages, zodat je in fase 6 een
+## vierde type kunt toevoegen of een zwaar type zeldzamer kunt maken zonder alle
+## andere getallen opnieuw te hoeven laten optellen tot honderd.
+func _kies_type() -> VijandType:
+	if vijand_types.is_empty():
+		return null
+
+	var totaal := 0.0
+	for t in vijand_types:
+		if t != null:
+			totaal += maxf(t.spawngewicht, 0.0)
+
+	if totaal <= 0.0:
+		return vijand_types[0]
+
+	var trekking := randf() * totaal
+	for t in vijand_types:
+		if t == null:
+			continue
+		trekking -= maxf(t.spawngewicht, 0.0)
+		if trekking <= 0.0:
+			return t
+
+	# Alleen bereikbaar door afrondingsverschillen in het optellen hierboven.
+	return vijand_types[-1]
 
 
 ## Kiest een willekeurige hoek op een cirkel rond de speler. Ligt dat punt
