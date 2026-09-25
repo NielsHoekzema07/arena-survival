@@ -26,19 +26,18 @@ max_value = 1000.0
 value = 1000.0
 show_percentage = false
 
-[node name="LinksBoven" type="VBoxContainer" parent="."]
-anchors_preset = 0
+[node name="LinksBoven" type="VBoxContainer" parent="." unique_id=1909317523]
 offset_left = 20.0
 offset_top = 16.0
 offset_right = 240.0
 offset_bottom = 60.0
 
-[node name="GolfLabel" type="Label" parent="LinksBoven"]
+[node name="GolfLabel" type="Label" parent="LinksBoven" unique_id=1553139945]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Golf 0"
 
-[node name="TijdLabel" type="Label" parent="LinksBoven"]
+[node name="TijdLabel" type="Label" parent="LinksBoven" unique_id=1916059879]
 layout_mode = 2
 text = "0:00"
 

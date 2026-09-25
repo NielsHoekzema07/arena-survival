@@ -13,6 +13,12 @@ Per bestand vastleggen waar het vandaan komt en onder welke licentie. Nodig voor
 | `assets/art/enemies/clawed_abomination.png` | Pack "basic asset pack", Basic Demon Animations | **NOG INVULLEN** |
 | `assets/art/enemies/depraved_blackguard.png` | idem | **NOG INVULLEN** |
 | `assets/art/enemies/crimson_imp.png` | idem | **NOG INVULLEN** |
+| `assets/art/floor/stone_tiles.png` | Zelf gegenereerd binnen dit project | Eigen werk, geen licentie nodig |
+
+De vloertextuur is geen gedownload bestand maar met een scriptje gegenereerd:
+256×256, naadloos tegelbaar, met de kleuren afgeleid van de oorspronkelijke
+vloerkleur `Color(0.145, 0.157, 0.188)`. Dat scheelt een licentie om te
+controleren, en de kleuren passen per definitie bij de rest.
 
 De vijandsprites zijn spritesheets van 64×16 met vier loopframes van 16×16. Ze
 worden niet opgeknipt tot losse bestanden: de `.tres` van elk vijandtype wijst
