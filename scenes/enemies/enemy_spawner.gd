@@ -34,16 +34,33 @@ extends Node2D
 
 var _timer: Timer
 var _doel: Node2D
+var _moeilijkheid: Moeilijkheid
 
 
 func _ready() -> void:
 	_doel = get_tree().get_first_node_in_group("player")
+	_moeilijkheid = get_tree().get_first_node_in_group("moeilijkheid")
 
 	_timer = Timer.new()
-	_timer.wait_time = spawn_interval
+	_timer.wait_time = _huidig_interval()
 	_timer.autostart = true
 	_timer.timeout.connect(_op_timer)
 	add_child(_timer)
+
+	if _moeilijkheid != null:
+		_moeilijkheid.golf_veranderd.connect(_op_golf_veranderd)
+
+
+## `spawn_interval` blijft de basiswaarde voor golf 0; de moeilijkheid rekent
+## daar de verkorting overheen.
+func _huidig_interval() -> float:
+	if _moeilijkheid == null:
+		return spawn_interval
+	return _moeilijkheid.spawn_interval_voor(spawn_interval)
+
+
+func _op_golf_veranderd(_nieuwe_golf: int) -> void:
+	_timer.wait_time = _huidig_interval()
 
 
 func _op_timer() -> void:
@@ -62,7 +79,18 @@ func _op_timer() -> void:
 	#
 	# spawn_op zet een positie in het stelsel van de spawner, vandaar dat de
 	# eigen global_position eraf gaat.
-	vijand.spawn_op(_kies_spawnpositie() - global_position, _kies_type())
+	var hp_factor := 1.0
+	var schade_factor := 1.0
+	if _moeilijkheid != null:
+		hp_factor = _moeilijkheid.hp_factor()
+		schade_factor = _moeilijkheid.schade_factor()
+
+	vijand.spawn_op(
+		_kies_spawnpositie() - global_position,
+		_kies_type(),
+		hp_factor,
+		schade_factor
+	)
 	add_child(vijand)
 
 

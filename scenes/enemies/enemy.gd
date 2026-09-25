@@ -104,8 +104,21 @@ func _ga_dood() -> void:
 ## aanmaken. In fase 7 roept de object pool dezelfde functie aan bij het
 ## hergebruiken van een vijand, zodat er dan niets aan deze scene hoeft te
 ## veranderen.
-func spawn_op(positie: Vector2, nieuw_type: VijandType = null) -> void:
+func spawn_op(
+	positie: Vector2,
+	nieuw_type: VijandType = null,
+	hp_factor: float = 1.0,
+	schade_factor: float = 1.0
+) -> void:
 	pas_type_toe(nieuw_type)
+
+	# Altijd vanaf de basiswaarde in het type rekenen en nooit vanaf de huidige
+	# waarde. Anders stapelt de factor op zodra een vijand uit de object pool in
+	# fase 7 een tweede keer gespawnd wordt.
+	if _type != null:
+		max_health = int(roundf(_type.max_health * hp_factor))
+		contactschade = int(roundf(_type.contactschade * schade_factor))
+		health = max_health
 
 	# `position` en niet `global_position`: deze functie wordt aangeroepen
 	# voordat de vijand in de scene-boom hangt, en global_position heeft dan geen

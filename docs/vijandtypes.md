@@ -72,9 +72,39 @@ raakt een vijand je terwijl hij nog zichtbaar naast je loopt, of andersom. Let
 er ook op dat vijanden elkaar opzij duwen: een grotere straal betekent dat een
 Abomination meer ruimte inneemt in een kluwen.
 
-## Nog te doen in fase 6
+## Oplopende moeilijkheidsgraad
 
-De waarden hierboven zijn de startwaarden. De moeilijkheidsgraad moet nog
-oplopen met de speeltijd — spawnfrequentie omhoog, en levenspunten en
-contactschade schalen mee. De logische plek daarvoor is de spawner, die dan de
-waarden van het gekozen type vermenigvuldigt voordat hij ze doorgeeft.
+De waarden hierboven zijn de waarden in **golf 0**. `Moeilijkheid` in
+`main.tscn` houdt de runtijd bij en deelt die in golven van 30 seconden. Per
+golf:
+
+| | Formule | Golf 0 | Golf 4 | Golf 8 |
+|---|---|---|---|---|
+| Spawninterval | `1,0 × 0,9^golf`, min. 0,15 s | 1,00 s | 0,66 s | 0,43 s |
+| Levenspunten | `× (1 + 0,15 × golf)` | ×1,00 | ×1,60 | ×2,20 |
+| Contactschade | `× (1 + 0,10 × golf)` | ×1,00 | ×1,40 | ×1,80 |
+
+Een Depraved Blackguard heeft in golf 8 dus 231 levenspunten en doet 180
+contactschade.
+
+**De factoren worden bij het spawnen toegepast, niet in de `.tres` geschreven.**
+Een resource is gedeeld: schrijf je erin, dan worden vijanden die al op het
+scherm staan met terugwerkende kracht sterker, en heb je na een herstart geen
+schone beginwaarden meer. De `.tres` blijft de basiswaarde, de schaling staat
+daar los van.
+
+Loopsnelheid schaalt bewust **niet** mee. De speler loopt 300 px/s en de Crimson
+Imp zit al op 210. Zou snelheid meeschalen, dan kun je op een gegeven moment
+niet meer weglopen en is het spel niet meer te spelen — snelheid is de enige
+knop die iets onmogelijk maakt in plaats van moeilijk.
+
+### Let op bij het balanceren
+
+Spawnfrequentie en levenspunten **vermenigvuldigen** elkaar. In golf 8 spawnt er
+2,3 keer zo vaak een vijand die 2,2 keer zo taai is; je moet dan ongeveer vijf
+keer zoveel schade per seconde doen als in golf 0 om gelijk te blijven.
+
+Dat betekent dat deze curve pas klopt als het upgradesysteem er is. Bij +15 procent
+schade per level-up heb je ongeveer twaalf level-ups nodig om golf 8 bij te
+houden — dat is het richtgetal voor hoeveel experience een vijand moet droppen.
+Tot die tijd loop je na een paar minuten gegarandeerd onder de voet.

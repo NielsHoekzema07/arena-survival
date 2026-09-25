@@ -9,6 +9,7 @@
 [ext_resource type="Resource" path="res://scenes/enemies/types/clawed_abomination.tres" id="6_type"]
 [ext_resource type="Resource" path="res://scenes/enemies/types/depraved_blackguard.tres" id="7_type"]
 [ext_resource type="Resource" path="res://scenes/enemies/types/crimson_imp.tres" id="8_type"]
+[ext_resource type="Script" path="res://scenes/main/moeilijkheid.gd" id="9_moeilijk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5a4"]
 size = Vector2(5064, 32)
@@ -58,6 +59,9 @@ shape = SubResource("RectangleShape2D_b1x3f")
 [node name="Player" parent="." unique_id=2005259374 instance=ExtResource("1_player")]
 
 [node name="Projectielen" type="Node2D" parent="." unique_id=1598638241 groups=["projectielen"]]
+
+[node name="Moeilijkheid" type="Node" parent="."]
+script = ExtResource("9_moeilijk")
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2063556495]
 script = ExtResource("3_spawner")
