@@ -35,11 +35,13 @@ extends Node2D
 var _timer: Timer
 var _doel: Node2D
 var _moeilijkheid: Moeilijkheid
+var _vijvers: Vijvers
 
 
 func _ready() -> void:
 	_doel = get_tree().get_first_node_in_group("player")
 	_moeilijkheid = get_tree().get_first_node_in_group("moeilijkheid")
+	_vijvers = get_tree().get_first_node_in_group("vijvers")
 
 	_timer = Timer.new()
 	_timer.wait_time = _huidig_interval()
@@ -124,17 +126,22 @@ func _kies_type() -> VijandType:
 
 
 ## Kiest een willekeurige hoek op een cirkel rond de speler. Ligt dat punt
-## buiten het speelveld, dan wordt een andere hoek geprobeerd; lukt dat na een
-## paar pogingen niet, dan wordt het punt naar binnen getrokken.
+## buiten het speelveld of in een vijver, dan wordt een andere hoek geprobeerd;
+## lukt dat na een paar pogingen niet, dan wordt het punt naar binnen getrokken.
 func _kies_spawnpositie() -> Vector2:
 	var veld := Speelveld.rect_met_marge(muurmarge)
 	var midden := _doel.global_position
 
-	for _poging in 12:
+	for _poging in 20:
 		var hoek := randf() * TAU
 		var positie := midden + Vector2.RIGHT.rotated(hoek) * spawn_afstand
-		if veld.has_point(positie):
-			return positie
+		if not veld.has_point(positie):
+			continue
+		# Een vijand die in het water verschijnt zit meteen klem, want water
+		# ligt op dezelfde laag als de muren.
+		if _vijvers != null and _vijvers.ligt_in_vijver(positie, 40.0):
+			continue
+		return positie
 
 	# Terugvaloptie: op de cirkel, maar binnen de muren geduwd.
 	var hoek_fallback := randf() * TAU

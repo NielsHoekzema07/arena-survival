@@ -1,51 +1,136 @@
-[gd_scene format=3 uid="uid://cui2paftyaw2o"]
+[gd_scene load_steps=22 format=3 uid="uid://cui2paftyaw2o"]
 
 [ext_resource type="Script" uid="uid://bhr7qnpco1ai0" path="res://scenes/player/player.gd" id="1_player"]
-[ext_resource type="Texture2D" uid="uid://be4q7pnui57lv" path="res://assets/art/playerGrey_up1.png" id="2_up1"]
-[ext_resource type="Texture2D" uid="uid://cb7x3nbff4ce" path="res://assets/art/playerGrey_up2.png" id="3_up2"]
-[ext_resource type="Texture2D" uid="uid://bxh73ema3ujhc" path="res://assets/art/playerGrey_walk1.png" id="4_walk1"]
-[ext_resource type="Texture2D" uid="uid://bbkanf3slb7gy" path="res://assets/art/playerGrey_walk2.png" id="5_walk2"]
 [ext_resource type="Script" uid="uid://8jtti3nmy3a1" path="res://scenes/player/weapon.gd" id="6_weapon"]
 [ext_resource type="PackedScene" uid="uid://bybkpo3fep85n" path="res://scenes/projectiles/Bullet.tscn" id="7_bullet"]
+[ext_resource type="Texture2D" path="res://assets/art/player/soldier_walk.png" id="8_walk"]
+[ext_resource type="Texture2D" path="res://assets/art/player/soldier_idle.png" id="9_idle"]
+
+[sub_resource type="AtlasTexture" id="W0"]
+atlas = ExtResource("8_walk")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="W1"]
+atlas = ExtResource("8_walk")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="W2"]
+atlas = ExtResource("8_walk")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="W3"]
+atlas = ExtResource("8_walk")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="W4"]
+atlas = ExtResource("8_walk")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="W5"]
+atlas = ExtResource("8_walk")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="W6"]
+atlas = ExtResource("8_walk")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="W7"]
+atlas = ExtResource("8_walk")
+region = Rect2(700, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="I0"]
+atlas = ExtResource("9_idle")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="I1"]
+atlas = ExtResource("9_idle")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="I2"]
+atlas = ExtResource("9_idle")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="I3"]
+atlas = ExtResource("9_idle")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="I4"]
+atlas = ExtResource("9_idle")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="I5"]
+atlas = ExtResource("9_idle")
+region = Rect2(500, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_up1")
+"texture": SubResource("I0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_up2")
+"texture": SubResource("I1")
+}, {
+"duration": 1.0,
+"texture": SubResource("I2")
+}, {
+"duration": 1.0,
+"texture": SubResource("I3")
+}, {
+"duration": 1.0,
+"texture": SubResource("I4")
+}, {
+"duration": 1.0,
+"texture": SubResource("I5")
 }],
-"loop": 1,
-"name": &"up",
+"loop": true,
+"name": &"idle",
 "speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_walk1")
+"texture": SubResource("W0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_walk2")
+"texture": SubResource("W1")
+}, {
+"duration": 1.0,
+"texture": SubResource("W2")
+}, {
+"duration": 1.0,
+"texture": SubResource("W3")
+}, {
+"duration": 1.0,
+"texture": SubResource("W4")
+}, {
+"duration": 1.0,
+"texture": SubResource("W5")
+}, {
+"duration": 1.0,
+"texture": SubResource("W6")
+}, {
+"duration": 1.0,
+"texture": SubResource("W7")
 }],
-"loop": 1,
+"loop": true,
 "name": &"walk",
-"speed": 8.0
+"speed": 12.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_player"]
-radius = 24.0
+radius = 22.0
 
 [node name="Player" type="CharacterBody2D" unique_id=877453182]
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_player")
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=912648972]
-scale = Vector2(0.5, 0.5)
+texture_filter = 1
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_player")
-animation = &"up"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=477987499]
 shape = SubResource("CircleShape2D_player")

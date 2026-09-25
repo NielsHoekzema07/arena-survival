@@ -10,7 +10,8 @@
 [ext_resource type="Resource" path="res://scenes/enemies/types/depraved_blackguard.tres" id="7_type"]
 [ext_resource type="Resource" path="res://scenes/enemies/types/crimson_imp.tres" id="8_type"]
 [ext_resource type="Script" path="res://scenes/main/moeilijkheid.gd" id="9_moeilijk"]
-[ext_resource type="Texture2D" path="res://assets/art/floor/stone_tiles.png" id="10_vloer"]
+[ext_resource type="Texture2D" path="res://assets/art/floor/grass.png" id="10_vloer"]
+[ext_resource type="Script" path="res://scenes/main/vijvers.gd" id="11_vijvers"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5a4"]
 size = Vector2(5064, 32)
@@ -35,8 +36,13 @@ texture_repeat = 2
 texture = ExtResource("10_vloer")
 polygon = PackedVector2Array(-2500, -1500, 2500, -1500, 2500, 1500, -2500, 1500)
 
+[node name="Vijvers" type="Node2D" parent="Arena"]
+script = ExtResource("11_vijvers")
+
 [node name="Raster" type="Node2D" parent="Arena" unique_id=1715483349]
 script = ExtResource("2_raster")
+lijnkleur = Color(1, 1, 1, 0)
+zware_lijnkleur = Color(1, 1, 1, 0)
 
 [node name="Muren" type="StaticBody2D" parent="Arena" unique_id=437094895]
 collision_layer = 16

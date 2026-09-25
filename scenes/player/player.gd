@@ -132,19 +132,13 @@ func _ga_dood() -> void:
 
 
 func _update_animation(direction: Vector2) -> void:
-	if direction == Vector2.ZERO:
-		_sprite.stop()
-		return
-
+	# De soldaat heeft alleen een zijaanzicht, dus er is geen boven- of
+	# onderaanzicht om naar over te schakelen. Stilstaan is `idle`, bewegen is
+	# `walk`, en de kijkrichting is puur een horizontale spiegeling.
+	_sprite.animation = &"idle" if direction == Vector2.ZERO else &"walk"
 	_sprite.play()
 
-	# De grootste component bepaalt of de speler er van opzij of van
-	# voor/achter uitziet.
-	if absf(direction.x) > absf(direction.y):
-		_sprite.animation = &"walk"
-		_sprite.flip_v = false
+	# Loop je recht omhoog of omlaag, dan is er geen horizontale component en
+	# blijft hij kijken zoals hij keek. Dat is rustiger dan heen en weer klappen.
+	if not is_zero_approx(direction.x):
 		_sprite.flip_h = direction.x < 0.0
-	else:
-		_sprite.animation = &"up"
-		_sprite.flip_v = direction.y > 0.0
-		_sprite.flip_h = false
