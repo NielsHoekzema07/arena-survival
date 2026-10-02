@@ -7,10 +7,10 @@ extends RefCounted
 ## hulpfuncties. Door `class_name` is Speelveld overal beschikbaar zonder
 ## autoload, ook in @tool-scripts.
 ##
-## LET OP: de muren in scenes/main/main.tscn staan los hiervan ingesteld.
-## Pas je GROOTTE aan, verplaats dan ook die vier CollisionShape2D's.
+## GROOTTE aanpassen is genoeg: arena.gd zet vloer en muren erop, player.gd de
+## camera-limieten, en de spawner kiest zijn posities hierbinnen.
 
-const GROOTTE := Vector2(2000, 1200)
+const GROOTTE := Vector2(5000,3000)
 
 
 ## Het speelveld als rechthoek, met (0, 0) in het midden.
