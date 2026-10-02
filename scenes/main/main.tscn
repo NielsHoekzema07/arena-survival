@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://scenes/main/moeilijkheid.gd" id="9_moeilijk"]
 [ext_resource type="Texture2D" path="res://assets/art/floor/grass.png" id="10_vloer"]
 [ext_resource type="Script" path="res://scenes/main/vijvers.gd" id="11_vijvers"]
+[ext_resource type="Script" path="res://scenes/main/decoratie.gd" id="12_deco"]
+[ext_resource type="Texture2D" path="res://assets/art/floor/decoratie.png" id="13_motieven"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5a4"]
 size = Vector2(5064, 32)
@@ -32,12 +34,18 @@ metadata/_edit_group_ = true
 script = ExtResource("1_6q06x")
 
 [node name="Vloer" type="Polygon2D" parent="Arena" unique_id=1143302583]
+texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("10_vloer")
+texture_scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(-2500, -1500, 2500, -1500, 2500, 1500, -2500, 1500)
 
 [node name="Vijvers" type="Node2D" parent="Arena"]
 script = ExtResource("11_vijvers")
+
+[node name="Decoratie" type="Node2D" parent="Arena"]
+script = ExtResource("12_deco")
+motieven = ExtResource("13_motieven")
 
 [node name="Raster" type="Node2D" parent="Arena" unique_id=1715483349]
 script = ExtResource("2_raster")

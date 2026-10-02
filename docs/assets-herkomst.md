@@ -15,6 +15,7 @@ Per bestand vastleggen waar het vandaan komt en onder welke licentie. Nodig voor
 | `assets/art/enemies/crimson_imp.png` | idem | **NOG INVULLEN** |
 | `assets/art/floor/stone_tiles.png` | Zelf gegenereerd binnen dit project | Eigen werk, geen licentie nodig |
 | `assets/art/floor/grass.png` | Zelf gegenereerd binnen dit project | Eigen werk, geen licentie nodig |
+| `assets/art/floor/decoratie.png` | Zelf gegenereerd binnen dit project | Eigen werk, geen licentie nodig |
 | `assets/art/player/soldier_walk.png` | Pack "Tiny RPG Character Asset Pack 01 v2.0", Soldier | **NOG INVULLEN** |
 | `assets/art/player/soldier_idle.png` | idem | **NOG INVULLEN** |
 
